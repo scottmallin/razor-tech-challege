@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="overflow-clip">
     <nav>
       <div class="container">
         <div class="row">
@@ -22,17 +22,38 @@
       </div>
     </header>
     <div class="single-product-content">
-      <BuyForm :product="product" />
-      <ul class="single-product-content__badges"></ul>
-      <main class="single-product-content__intro">
-        <h3>{{ product.pageTitle }}</h3>
-        <h5>{{ product.pageSubtitle }}</h5>
-        <div
-          class="single-product-content__body"
-          v-html="product.pageBody"
-        ></div>
-      </main>
-      <div class="single-product-content__more-info"></div>
+      <div class="container">
+        <div class="row flex-col-reverse lg:flex-row">
+          <div class="col-12 lg:col-6">
+            <h3>{{ product.pageTitle }}</h3>
+          </div>
+          <div class="col-12 lg:col-5 lg:offset-1">
+            <ul class="single-product-content__badges">
+              <li v-for="tag in product.tags" :key="tag.index">
+                <Badge :title="tag" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 lg:col-6">
+            <main class="single-product-content__intro">
+              <h5>{{ product.pageSubtitle }}</h5>
+              <div
+                class="single-product-content__body"
+                v-html="product.pageBody"
+              ></div>
+            </main>
+          </div>
+          <div class="col-12 lg:col-5 lg:offset-1 mb-24 lg:mb-0">
+            <div
+              class="single-product-content__more-info"
+              v-html="product.description"
+            ></div>
+            <BuyForm :product="product" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -41,6 +62,7 @@
 import { ref } from "@vue/reactivity";
 import { useRoute } from "vue-router";
 import BuyForm from "../components/BuyForm.vue";
+import Badge from "../components/Badge.vue";
 export default {
   name: "Product",
   setup() {
@@ -62,9 +84,10 @@ export default {
       }
     };
     load();
+
     return { product };
   },
-  components: { BuyForm },
+  components: { BuyForm, Badge },
 };
 </script>
 
@@ -78,13 +101,22 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 159px;
   }
 
   img {
     position: relative;
     z-index: 1;
     margin: 0 auto;
+  }
+}
+
+.single-product-content {
+  &__badges {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    gap: 1rem;
+    margin-bottom: 36px;
   }
 }
 </style>

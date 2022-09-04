@@ -10,9 +10,13 @@ body {
   @apply bg-black;
 
   background-image: url("../assets/orbs.png");
-  background-size: contain;
+  background-size:auto 500px;
   background-position: center top;
   background-repeat: no-repeat;
+
+  @screen lg {
+    background-size: contain;
+  }
 }
 
 @import "./text";

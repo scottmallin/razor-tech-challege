@@ -1,4 +1,14 @@
 button, .button {
     @apply rounded-full py-4 px-8;
     @apply font-display text-badge uppercase;
+    @apply text-white;
+    @apply text-center;
+}
+
+.badge {
+    @apply py-1 px-2;
+    @apply rounded-lg;
+    @apply bg-primary text-white;
+    @apply text-badge leading-badge capitalize;
+    @apply text-center;
 }

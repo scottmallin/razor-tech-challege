@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div @scroll="scrolling">
     <ProductsHeader title="Latest Products" />
-    <section class="list-controls">
+    <section class="list-controls -mt-16 mb-16">
       <div class="container">
         <div class="row">
           <div class="col-12 flex justify-end">
@@ -20,16 +20,14 @@
         </div>
       </div>
     </section>
-    <section v-if="products.count">
+    <section v-if="products.count" class="pb-20 relative z-10">
       <div class="container">
-        <div class="row">
-          <div
+        <div class="row gap-y-6">
+          <ProductCard
             v-for="product in products.items"
+            :product="product"
             :key="product.id"
-            class="col-12 md:col-6 lg:col-4 product-card"
-          >
-            <a :href="'/products/' + product.id">{{ product.name }}</a>
-          </div>
+          />
         </div>
       </div>
     </section>
@@ -38,8 +36,9 @@
 </template>
 
 <script>
-import { reactive, ref } from "@vue/reactivity";
+import { ref } from "@vue/reactivity";
 import ProductsHeader from "../components/ProductsHeader.vue";
+import ProductCard from "../components/ProductCard.vue";
 import { watch } from "@vue/runtime-core";
 export default {
   name: "Products",
@@ -76,6 +75,10 @@ export default {
       }
     });
 
+    const scrolling = (e) => {
+      console.log("scrolling", e);
+    };
+
     const load = async () => {
       try {
         let data = await fetch(
@@ -91,9 +94,9 @@ export default {
       }
     };
     load();
-    return { products, listControls };
+    return { products, listControls, scrolling };
   },
-  components: { ProductsHeader },
+  components: { ProductsHeader, ProductCard },
 };
 </script>
 
