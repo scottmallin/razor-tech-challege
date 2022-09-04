@@ -11,47 +11,56 @@
         </div>
       </div>
     </nav>
-    <header class="single-product-header">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 text-center">
-            <h1>{{ product.name }}</h1>
-            <img :src="product.image" :alt="'Image of ' + product.name" />
+    <div v-if="product.id">
+      <header class="single-product-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 text-center">
+              <h1>{{ product.name }}</h1>
+              <img :src="product.image" :alt="'Image of ' + product.name" />
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="single-product-content">
+        <div class="container">
+          <div class="row flex-col-reverse lg:flex-row">
+            <div class="col-12 lg:col-6">
+              <h3>{{ product.pageTitle }}</h3>
+            </div>
+            <div class="col-12 lg:col-5 lg:offset-1">
+              <ul class="single-product-content__badges">
+                <li v-for="tag in product.tags" :key="tag.index">
+                  <Badge :title="tag" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 lg:col-6">
+              <main class="single-product-content__intro">
+                <h5>{{ product.pageSubtitle }}</h5>
+                <div
+                  class="single-product-content__body"
+                  v-html="product.pageBody"
+                ></div>
+              </main>
+            </div>
+            <div class="col-12 lg:col-5 lg:offset-1 mb-24 lg:mb-0">
+              <div
+                class="single-product-content__more-info"
+                v-html="product.description"
+              ></div>
+              <BuyForm :product="product" />
+            </div>
           </div>
         </div>
       </div>
-    </header>
-    <div class="single-product-content">
+    </div>
+    <div v-else>
       <div class="container">
-        <div class="row flex-col-reverse lg:flex-row">
-          <div class="col-12 lg:col-6">
-            <h3>{{ product.pageTitle }}</h3>
-          </div>
-          <div class="col-12 lg:col-5 lg:offset-1">
-            <ul class="single-product-content__badges">
-              <li v-for="tag in product.tags" :key="tag.index">
-                <Badge :title="tag" />
-              </li>
-            </ul>
-          </div>
-        </div>
         <div class="row">
-          <div class="col-12 lg:col-6">
-            <main class="single-product-content__intro">
-              <h5>{{ product.pageSubtitle }}</h5>
-              <div
-                class="single-product-content__body"
-                v-html="product.pageBody"
-              ></div>
-            </main>
-          </div>
-          <div class="col-12 lg:col-5 lg:offset-1 mb-24 lg:mb-0">
-            <div
-              class="single-product-content__more-info"
-              v-html="product.description"
-            ></div>
-            <BuyForm :product="product" />
-          </div>
+          <div class="col-12 text-center">Loading...</div>
         </div>
       </div>
     </div>
@@ -101,6 +110,10 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    @media screen and (max-width: 540px) {
+      font-size: 5rem;
+    }
   }
 
   img {
@@ -117,6 +130,13 @@ export default {
     padding-left: 0;
     gap: 1rem;
     margin-bottom: 36px;
+  }
+  &__intro {
+    margin-bottom: 32px;
+  }
+  &__more-info,
+  &__intro {
+    white-space: pre-line;
   }
 }
 </style>

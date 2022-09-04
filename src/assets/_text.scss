@@ -1,5 +1,5 @@
 body, html {
-    @apply font-sans text-mediumGrey;
+    @apply font-sans text-mediumGrey tracking-base;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -11,7 +11,7 @@ h1, h3, h4 {
 }
 
 h1 {
-    @apply text-h1 leading-h1;
+    @apply text-h1 leading-h1 tracking-h1;
     @apply font-bold;
 }
 
@@ -22,7 +22,7 @@ h1 {
 }
 
 h2 {
-    @apply text-h2 leading-h2;
+    @apply text-h2 leading-h2  tracking-h1;
 }
 
 h3 {

@@ -27,6 +27,11 @@ module.exports = {
       h2: "5.038rem",
       h1: "1em",
     },
+    letterSpacing: {
+      h1: "-1.5px",
+      h6: "0.15px",
+      base: "0.5px",
+    },
     colors: {
       primary: "#7f5af0",
       secondary: "#2cb67d",
@@ -34,6 +39,12 @@ module.exports = {
       darkGrey: "#5d6a7b",
       mediumGrey: "#94a1b2",
       white: "#fffffe",
+    },
+    screens: {
+      sm: "576px",
+      md: "768px",
+      lg: "991px",
+      xl: "1170px",
     },
     extend: {},
   },
@@ -44,7 +55,6 @@ module.exports = {
         md: "720px",
         lg: "960px",
         xl: "1140px",
-        "2xl": "1140px",
       },
     }),
   ],

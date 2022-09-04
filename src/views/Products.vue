@@ -1,16 +1,17 @@
 <template>
   <div @scroll="scrolling">
     <ProductsHeader title="Latest Products" />
-    <section class="list-controls -mt-16 mb-16">
+    <section class="list-controls -mt-16 mb-16 relative z-10">
       <div class="container">
         <div class="row">
-          <div class="col-12 flex justify-end">
-            Sort by:
+          <div class="col-12 flex items-center justify-between lg:justify-end">
+            <label for="list_controls">Sort by:</label>
             <select
               name="list_controls"
               id="list_controls"
               v-model="listControls"
             >
+              <option value="" selected>Select...</option>
               <option value="name_asc">Name Ascending</option>
               <option value="name_desc">Name Descending</option>
               <option value="price_asc">Price Ascending</option>
@@ -31,7 +32,13 @@
         </div>
       </div>
     </section>
-    <section v-else>No products</section>
+    <section v-else>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">No products available</div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -100,4 +107,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+label {
+  margin-right: 2rem;
+}
+select {
+  padding: 0.5rem 1rem;
+}
+</style>

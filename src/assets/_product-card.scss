@@ -1,0 +1,5 @@
+.product-card:nth-child(3n + 2) {
+    @screen lg {
+        @apply relative top-20;
+    }
+  }
