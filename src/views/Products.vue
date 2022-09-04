@@ -55,8 +55,6 @@ export default {
     const error = ref(null);
 
     watch(listControls, () => {
-      console.log("listControls change", listControls.value, products);
-
       if (listControls.value == "name_asc") {
         products.value.items.sort((a, b) => {
           if (a.name.toUpperCase() < b.name.toUpperCase()) {
@@ -81,10 +79,6 @@ export default {
         products.value.items.sort((a, b) => b.price - a.price);
       }
     });
-
-    const scrolling = (e) => {
-      console.log("scrolling", e);
-    };
 
     const load = async () => {
       try {
